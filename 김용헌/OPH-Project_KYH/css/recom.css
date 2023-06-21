@@ -1,0 +1,96 @@
+/* Main Global */
+:root {
+  /* Color */
+  --color-logo: #006aff;
+  --color-white: #ffffff;
+  --color-light-white: #f9f9f9;
+  --color-light-green: #32a28c;
+  --color-light-blue: #00b0f0;
+  --color-dark--blue: #004ab2;
+  --color-light-grey: #f5f5f5;
+  --color-grey: #b0b0b0;
+  --color-black: #000000;
+  --color-light-black: #383838;
+
+  /* Font size */
+  --font-big: 48px;
+  --font-large: 38px;
+  --font-medium: 28px;
+  --font-regular: 20px;
+  --font-small: 18px;
+  --font-micro: 14px;
+
+  /* Font weight */
+  --weight-bold: 700;
+  --weight-semi-bold: 600;
+  --weight-regular: 400;
+  --weight-small: 200;
+  --weight-micro: 100;
+}
+
+/* main */
+main {
+  margin-top: 66px;
+}
+
+/* informationbar */
+.informationbar {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+  width: 100%;
+  height: 35px;
+  background: var(--color-light-grey);
+  border: 1px solid #d8dade;
+  margin: auto;
+}
+
+.informationbar__sidebar {
+  width: 95px;
+  height: 100%;
+  color: var(--color-white);
+  background: var(--color-dark--blue);
+  font-weight: var(--weight-micro);
+  text-decoration: none;
+  line-height: 34px;
+}
+
+.informationbar__manual {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-left: 40px;
+  font-size: var(--font-micro);
+  font-weight: var(--weight-micro);
+}
+
+.informationbar__manual__usage {
+  color: var(--color-white);
+  background: var(--color-light-blue);
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin: 5px 5px;
+  cursor: pointer;
+  font-size: var(--font-micro);
+  text-decoration: none;
+}
+
+.informationbar__manual__text {
+  margin-left: 5px;
+}
+
+/* map */
+.map_wrap {
+  position: fixed;
+  top: calc(66px + 35px); /* nav와 informationbar의 높이를 고려하여 조정 */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+
+#map {
+  width: 100%;
+  height: 100%;
+}

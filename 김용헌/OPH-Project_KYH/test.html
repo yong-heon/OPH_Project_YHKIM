@@ -1,0 +1,205 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <style>
+    [data-item="2"] {
+      left: 0;
+      top: 0;
+      z-index: 100;
+      width: 100%;
+      height: 100%;
+    }
+
+    li {
+        display: list-item;
+        text-align: -webkit-match-parent;
+    }
+    ul, ol, dl, dt, dd {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    body {
+        line-height: 1.6;
+        font-size: 11px;
+        font-weight: 400;
+        font-family: 'Lato', 'Noto Sans KR','Malgun Gothic','맑은 고딕','NotoSans','돋움',Dotum,Helvetica,Verdana,Arial,sans-serif;
+    }
+
+    [data-item="2"]>ul>li:nth-child(1){margin: -28.5% 0 0 12%;}
+    [data-item="2"]>ul>li:nth-child(2){margin: -17% 0 0 -8.5%;}
+    [data-item="2"]>ul>li:nth-child(3){margin: -22.5% 0 0 7%;}
+    [data-item="2"]>ul>li:nth-child(4){margin: -25% 0 0 19%;}
+    [data-item="2"]>ul>li:nth-child(5){margin: -13% 0 0 0%;}
+    [data-item="2"]>ul>li:nth-child(6){margin: -14% 0 0 8.5%;}
+    [data-item="2"]>ul>li:nth-child(7){margin: -13% 0 0 23.5%;}
+    [data-item="2"]>ul>li:nth-child(8){margin: -8% 0 0 -7%;}
+    [data-item="2"]>ul>li:nth-child(9){margin: -9% 0 0 15.5%;}
+    [data-item="2"]>ul>li:nth-child(10){margin: -5% 0 0 -29%;}
+    [data-item="2"]>ul>li:nth-child(11){margin: -4% 0 0 -12%;}
+    [data-item="2"]>ul>li:nth-child(12){margin: -5.5% 0 0 4%;}
+    [data-item="2"]>ul>li:nth-child(13){margin: -3% 0 0 13.5%;}
+    [data-item="2"]>ul>li:nth-child(14){margin: -2% 0 0 22%;}
+    [data-item="2"]>ul>li:nth-child(15){margin: -3% 0 0 33.5%;}
+    [data-item="2"]>ul>li:nth-child(16){margin: 4% 0 0 -22%;}
+    [data-item="2"]>ul>li:nth-child(17){margin: 1% 0 0 2.5%;}
+    [data-item="2"]>ul>li:nth-child(18){margin: 10% 0 0 -25%;}
+    [data-item="2"]>ul>li:nth-child(19){margin: 4% 0 0 -12%;}
+    [data-item="2"]>ul>li:nth-child(20){margin: 8% 0 0 -3%;}
+    [data-item="2"]>ul>li:nth-child(21){margin: 10% 0 0 16%;}
+    [data-item="2"]>ul>li:nth-child(22){margin: 7% 0 0 27%;}
+    [data-item="2"]>ul>li:nth-child(23){margin: 15% 0 0 -5%;}
+    [data-item="2"]>ul>li:nth-child(24){margin: 14% 0 0 10%;}
+    [data-item="2"]>ul>li:nth-child(25){margin: 16.5% 0 0 -14%;}
+
+    [data-item]>ul>li>input[type="radio"]{opacity:0; position:absolute; left:0; top:0;}
+    [data-item]>ul>li>label{
+        display:inline-block; height:2.2em; line-height:2.2em; padding:0 0.5em; cursor:pointer; color:#505052; background-color:#F3F5F8;
+        -webkit-border-radius:0.3em;
+        border-radius:0.3em;
+    }
+    [data-item]>ul>li>input[type="radio"]:checked + label{color:#fff; background-color:#4568D5;}
+    [data-item]>ul>li>label>span{vertical-align:middle; font-size:1.4em;}
+
+    [data-item]{position:relative;}
+    [data-item]>ul{position:absolute; left:0; top:0; z-index:100; width:100%; height:100%;}
+    [data-item]>ul>li{
+        position:absolute; left:50%; top:50%;
+        -webkit-transform:translate(-50%,-50%);
+        transform:translate(-50%,-50%);
+    }
+
+    .midd{overflow:hidden; position:relative; border-top:none;}
+
+    .midd > [class*="step-"]{
+        float:left; position:relative; width:50%; padding:2em; background-color:#fff;
+        -webkit-transition:left 0.3s ease;
+        transition:left 0.3s ease;
+    }
+    .midd > [class*="step-"] .midd{position:relative;padding:3em 0;}
+
+    .midd > [class*="step-"] .midd .bg-map{position:relative; z-index:0; width:100%;}
+    .midd > [class*="step-"] .midd .bg-map img{display:block; position:relative; z-index:0; max-width:100%; margin:0 auto;}
+
+  </style>
+</head>
+
+<body>
+  <div class="midd">
+    <div class="step-1">
+      <div class="midd">
+        <div class="bg-map">
+          <div data-item="2" class=".test">
+            <ul>
+              <li><input type="radio" name="map-report-map2" id="map-report-map2_1">
+                <label for="map-report-map2_1">
+                  <span>도봉구</span></label>
+              </li>
+              <li><input type="radio" name="map-report-map2" id="map-report-map2_2">
+                <label for="map-report-map2_2">
+                  <span>은평구</span></label>
+              </li>
+              <li><input type="radio" name="map-report-map2" id="map-report-map2_3">
+                <label for="map-report-map2_3">
+                  <span>강북구</span></label>
+              </li>
+              <li><input type="radio" name="map-report-map2" id="map-report-map2_4">
+                <label for="map-report-map2_4">
+                  <span>노원구</span></label>
+              </li>
+              <li><input type="radio" name="map-report-map2" id="map-report-map2_5">
+                <label for="map-report-map2_5">
+                  <span>종로구</span></label>
+              </li>
+              <li><input type="radio" name="map-report-map2" id="map-report-map2_6">
+                <label for="map-report-map2_6">
+                  <span>성북구</span></label>
+              </li>
+              <li><input type="radio" name="map-report-map2" id="map-report-map2_7">
+                <label for="map-report-map2_7">
+                  <span>중랑구</span></label>
+              </li>
+              <li><input type="radio" name="map-report-map2" id="map-report-map2_8">
+                <label for="map-report-map2_8">
+                  <span>서대문구</span></label>
+              </li>
+              <li><input type="radio" name="map-report-map2" id="map-report-map2_9">
+                <label for="map-report-map2_9">
+                  <span>동대문구</span></label>
+              </li>
+              <li><input type="radio" name="map-report-map2" id="map-report-map2_10">
+                <label for="map-report-map2_10">
+                  <span>강서구</span></label>
+              </li>
+              <li><input type="radio" name="map-report-map2" id="map-report-map2_11">
+                <label for="map-report-map2_11">
+                  <span>마포구</span></label>
+              </li>
+              <li><input type="radio" name="map-report-map2" id="map-report-map2_12">
+                <label for="map-report-map2_12">
+                  <span>중구</span></label>
+              </li>
+              <li><input type="radio" name="map-report-map2" id="map-report-map2_13">
+                <label for="map-report-map2_13">
+                  <span>성동구</span></label>
+              </li>
+              <li><input type="radio" name="map-report-map2" id="map-report-map2_14">
+                <label for="map-report-map2_14">
+                  <span>광진구</span></label>
+              </li>
+              <li><input type="radio" name="map-report-map2" id="map-report-map2_15">
+                <label for="map-report-map2_15">
+                  <span>강동구</span></label>
+              </li>
+              <li><input type="radio" name="map-report-map2" id="map-report-map2_16">
+                <label for="map-report-map2_16">
+                  <span>양천구</span></label>
+              </li>
+              <li><input type="radio" name="map-report-map2" id="map-report-map2_17">
+                <label for="map-report-map2_17">
+                  <span>용산구</span></label>
+              </li>
+              <li><input type="radio" name="map-report-map2" id="map-report-map2_18">
+                <label for="map-report-map2_18">
+                  <span>구로구</span></label>
+              </li>
+              <li><input type="radio" name="map-report-map2" id="map-report-map2_19">
+                <label for="map-report-map2_19">
+                  <span>영등포구</span></label>
+              </li>
+              <li><input type="radio" name="map-report-map2" id="map-report-map2_20">
+                <label for="map-report-map2_20">
+                  <span>동작구</span></label>
+              </li>
+              <li><input type="radio" name="map-report-map2" id="map-report-map2_21">
+                <label for="map-report-map2_21">
+                  <span>강남구</span></label>
+              </li>
+              <li><input type="radio" name="map-report-map2" id="map-report-map2_22">
+                <label for="map-report-map2_22">
+                  <span>송파구</span></label>
+              </li>
+              <li><input type="radio" name="map-report-map2" id="map-report-map2_23">
+                <label for="map-report-map2_23">
+                  <span>관악구</span></label>
+              </li>
+              <li><input type="radio" name="map-report-map2" id="map-report-map2_24">
+                <label for="map-report-map2_24">
+                  <span>서초구</span></label>
+              </li>
+              <li><input type="radio" name="map-report-map2" id="map-report-map2_25">
+                <label for="map-report-map2_25">
+                  <span>금천구</span></label>
+              </li>
+            </ul>
+            <img src="./wed_map_2.svg" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</body>
+
+</html>
