@@ -1,0 +1,618 @@
+/* Main Global */
+:root {
+  /* Color */
+  --color-logo: #006aff;
+  --color-white: #ffffff;
+  --color-light-white: #f9f9f9;
+  --color-grey: #b0b0b0;
+  --color-black: #000000;
+  --color-light-black: #383838;
+  --color-dark--blue: #0055cc;
+
+  /* Font size */
+  --font-big: 48px;
+  --font-large: 38px;
+  --font-medium: 28px;
+  --font-regular: 20px;
+  --font-small: 18px;
+  --font-micro: 14px;
+
+  /* Font weight */
+  --weight-bold: 700;
+  --weight-semi-bold: 600;
+  --weight-regular: 400;
+  --weight-small: 200;
+  --weight-micro: 100;
+}
+
+/* main */
+.main__container {
+  overflow: hidden; /* carousel이 부모 요소를 벗어나는 부분을 숨깁니다 */
+}
+
+.main__title {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 150%;
+  color: rgba(255, 255, 255, 0.8);
+  text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.6); /* 그림자 */
+
+}
+
+.text {
+  color: royalblue; 
+  font-weight: bold;
+  font-size: larger;
+  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.3); /* 윤곽선 */
+}
+
+.main__img-container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  
+}
+
+.carousel {
+  display: flex;
+  transition: transform 0.5s ease;
+ width: 300vw;
+}
+
+.carousel .main__carousel__img {
+  transition: opacity 2s ease-in-out;
+}
+
+.main__carousel__img{
+  object-fit: cover;
+  width: 100vw;
+  height: 100vh;
+}
+
+
+/* content */
+.main-section__content {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  padding: 200px 0 190px;
+  margin: 0 auto; 
+  width: 80%;
+}
+
+.cont {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  padding: 0 20px; /* 여백을 조금 주는 코드 */
+  margin: 0 auto;
+}
+
+.main-section__text {
+  width: 70%; /* 여백을 조금 주기 위해 너비를 45%로 설정 */
+  text-align: center;
+}
+
+.intro-text {
+  margin-top: 50px; /* 위에 여백 */
+  font-size: 20px; /* 적절한 크기 */
+  line-height: 2; /* 적당한 줄 간격 */
+  color: #0c0c0c; /* 쉽게 읽을 수 있는 어두운 색상 */
+  font-weight: 350;
+  text-align: center;  /* 텍스트를 가운데에 출력합니다. */
+}
+
+.text_highlight {
+  color: royalblue; 
+  font-weight: bold;
+  -webkit-text-stroke: 0.5px rgba(0, 0, 0, 0.3); /* 윤곽선 */
+}
+
+.main-section__analysis--title {
+  font-size: 32px; /* 글씨 크기를 크게 */
+  font-weight: bold; /* 글씨를 굵게 */
+  margin-top: 20px; 
+  margin-bottom: 30px;
+  color: #333; 
+}
+
+
+.main-section__icon {
+  display: inline-block; /* 이 줄을 추가합니다 */
+  width: 90px;
+  height: 90px;
+  margin: 0 auto;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+  border-radius: 20px;
+  background-color: #f8f8f8;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.main-section__plus {
+  margin: 0 10px;
+  font-size: 100px;
+  color: #00a7e4;
+  font-weight: 400;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5); /* 그림자 추가 */
+  -webkit-text-stroke: 1px #00a7e4; /* 윤곽선 추가 */
+}
+
+.main-section__cta {
+  width: 100%; /* 폭을 100%로 설정 */
+  display: inline-flex;
+  justify-content: center;
+  
+}
+
+.main-section__image-container {
+  overflow: hidden;
+  display: flex;
+  justify-content: flex-end; 
+  
+}
+
+.main-section__image {
+  margin-left: 150px;
+  margin-top: 100px;
+  width: 70%;
+  height: auto;
+  border-radius: 50px; /* 이미지 둥글게 만들기 */
+}
+
+.join__btn {
+  background-color: var(--color-logo);
+  color: var(--color-light-white);
+  border-radius: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  padding: 15px 40px; /* 버튼의 위 아래, 왼쪽 오른쪽 패딩을 각각 늘립니다 */
+  margin: 20px 0; /* 버튼의 위 아래 여백(margin)을 조정합니다. */
+  font-size: 30px; /* 글자 크기를 늘립니다 */
+  width: 200px; /* 버튼의 가로 길이를 늘립니다 */
+}
+
+.join__btn:hover {
+  background-color:  rgb(54, 137, 255);
+  color: var(--color-light-white);
+}
+
+.note {
+  font-size: 15px; /* 글자 크기를 작게 설정 */
+  color: rgba(0, 0, 0, 0.7); /* 검정색에 투명도 50% 적용 */
+  position: relative; /* 위치를 절대값으로 설정 */
+  bottom: 10px; /* 아래에서부터 10px 떨어진 곳에 배치 */
+  top: 30px;
+  text-align: center;
+}
+
+
+
+/* 스크롤 전 */
+.fade-in {
+  opacity: 0;
+  transition: opacity 0.9s ease-in-out;
+}
+
+/* 스크롤 후 */
+.fade-in.visible {
+  opacity: 1;
+}
+
+/* comment */
+.comment {
+  background-color: var(--color-white);
+}
+
+.comment__container {
+  position: relative;
+  text-align: center;
+  padding-top: 50px;
+  padding-bottom: 150px;
+}
+
+.comment__text {
+  font-size: var(--font-large);
+  font-weight: var(--weight-bold);
+  line-height: 150%;
+}
+
+.comment__text-accent {
+  height: 100%;
+  margin: 0 auto;
+  color: var(--color-logo);
+}
+
+/* service */
+.service {
+  background-color: var(--color-light-white);
+}
+.service__container {
+  justify-content: center;
+  align-items: center;
+  max-width: 1140px;
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  padding-top: 100px;
+  padding-bottom: 50px;
+}
+
+/* service__analysis */
+.service__analysis {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 100px;
+  padding-bottom: 50px;
+}
+
+.service__analysis__guide {
+  flex: 1;
+  order: 1;
+  text-align: right;
+}
+
+.service__analysis__img {
+  flex: 1;
+  order: 2;
+  text-align: center;
+  position: relative;
+}
+
+.service__analysis__img-item {
+  position: absolute;
+  left: 50%; /* 이동시키고자 하는 가로 위치 (50%는 중앙) */
+  transform: translate(-50%, -50%); /* 이미지의 중심을 기준으로 위치 조정 */
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  z-index: 1;
+}
+
+.service__analysis__guide__title {
+  font-size: var(--font-big);
+  line-height: 1.4;
+  padding-bottom: 20px;
+}
+
+.service__analysis__guide__text {
+  font-size: var(--font-regular);
+  line-height: 1.4;
+}
+
+/* service_recommendation */
+.service__recommendation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 50px;
+  padding-bottom: 100px;
+}
+
+.service__recommendation__guide {
+  flex: 1;
+  order: 2;
+  text-align: left;
+}
+
+.service__recommendation__img {
+  flex: 1;
+  order: 1;
+  text-align: center;
+  position: relative;
+}
+
+.service__recommendation__img-item {
+  position: absolute;
+  top: 20%; /* 이동시키고자 하는 세로 위치 (20%는 중앙) */
+  left: 50%; /* 이동시키고자 하는 가로 위치 (50%는 중앙) */
+  transform: translate(-50%, -50%); /* 이미지의 중심을 기준으로 위치 조정 */
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  z-index: 1;
+}
+
+.service__recommendation__guide__title {
+  font-size: var(--font-big);
+  line-height: 1.4;
+  padding-bottom: 20px;
+}
+
+.service__recommendation__guide__text {
+  font-size: var(--font-regular);
+  line-height: 1.4;
+}
+
+/* shortcut */
+.shortcut__container {
+  position: relative;
+  text-align: center;
+  margin: 150px 0 200px 0;
+}
+
+.shortcut__guide {
+  margin-bottom: 100px;
+}
+
+.shortcut__guide__title {
+  font-size: var(--font-big);
+  line-height: 1.4;
+  margin-bottom: 20px;
+}
+
+.shortcut__guide__text {
+  font-size: var(--font-medium);
+  font-weight: var(--weight-semi-bold);
+  line-height: 1.4;
+}
+
+.shortcut__content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shortcut__content-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  max-width: 300px;
+  -webkit-box-pack: start;
+}
+
+.shortcut__content-item ~ .shortcut__content-item {
+  margin-left: 200px;
+}
+
+.shortcut__content__title {
+  font-size: var(--font-medium);
+  font-weight: var(--weight-semi-bold);
+  line-height: 1.3;
+  text-align: left;
+}
+
+.shortcut__content__text {
+  font-size: var(--font-regular);
+  line-height: 1.6;
+  text-align: left;
+  margin: 15px 0 30px 0;
+}
+
+.shortcut__content__btn {
+  color: var(--color-light-white);
+  background-color: var(--color-logo);
+  border-radius: 10px;
+  padding: 11px 20px 11px 20px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.shortcut__content__btn:hover {
+  transition: 0.2s ease-in;
+  background-color: var(--color-dark--blue);
+}
+
+/* **************** Responsive Web ****************** */
+
+@media screen and (max-width: 1470px) {
+
+  /* content icon */
+  .main-section__analysis--title {
+    font-size: 25px;
+  }
+
+  .main-section__icon {
+    border-radius: 15px;
+    width: 70px;
+    height: 70px;
+  }
+
+  .main-section__plus {
+    -webkit-text-stroke: 0.7px #00a7e4; 
+    font-size: 80px;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .main-section__analysis--title {
+    font-size: 20px;
+  }
+
+  .main-section__icon {
+    border-radius: 10px;
+    width: 50px;
+    height: 50px;
+  }
+
+  .main-section__plus {
+    -webkit-text-stroke: 0.5px #00a7e4; 
+    font-size: 50px;
+  }
+
+  .intro-text{
+    font-size: 15px;
+  }
+
+  .join__btn{
+    padding: 15px 25px; 
+    margin: 20px 0; 
+    font-size: 20px; 
+    width: 150px; 
+  }
+
+  .note{
+    font-size: 13px;
+  }
+
+}
+
+/* Responsive Web (tablet) */
+@media screen and (max-width: 1024px) {
+  /* main */
+  .main__title {
+    font-size: var(--font-big);
+  }
+
+  /* content */
+  .main-section__content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .main-section__text {
+    margin-bottom: 20px;
+  }
+  /* comment */
+  .cont {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  .comment__text {
+    font-size: var(--font-medium);
+  }
+
+  .main-section__image{
+    margin: 0 auto;
+    width: 70%;
+  }
+
+  .main-section__analysis--title {
+    font-size: 150%;
+    margin-top: 50px;
+    margin-bottom: 40px;
+  }
+
+  .main-section__icon {
+    border-radius: 10px;
+    width: 15%;
+    height: 15%;
+  }
+
+  .main-section__plus {
+    -webkit-text-stroke: 0.5px #00a7e4; 
+    font-size: 4em;
+
+  }
+
+  .intro-text{
+    font-size: 1em;
+  }
+
+  .join__btn{
+    padding: 15px 25px; 
+    margin: 20px 0; 
+    font-size: 20px; 
+    width: 150px; 
+  }
+
+  .note{
+    font-size: 13px;
+  }
+
+  /* service */
+  .service__analysis,
+  .service__recommendation {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .service__analysis__guide {
+    order: 2;
+    text-align: left;
+  }
+
+  .service__analysis__img {
+    order: 1;
+  }
+
+
+}
+
+
+  
+/* Responsive Web (mobile) */
+@media screen and (max-width: 768px) {
+  /* main */
+  .main__title {
+    font-size: var(--font-medium);
+  }
+
+  /* content */
+  .main-section__content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .main-section__text {
+    margin-bottom: 15px;
+  }
+
+  /* comment */
+  .comment__text {
+    font-size: var(--font-medium);
+  }
+
+  /* shortcut */
+  .shortcut__content {
+    flex-direction: column;
+    margin: 0;
+    padding: 0 24px;
+  }
+
+  .shortcut__content-item {
+    width: 100%;
+  }
+
+  .shortcut__content-item ~ .shortcut__content-item {
+    margin-top: 80px;
+    margin-left: 0px;
+  }
+}
+
+/* Responsive Web (mobile : mini) */
+@media screen and (max-width: 500px) {
+  /* maim */
+  .main__title {
+    font-size: var(--font-regular);
+  }
+
+  /* content */
+  .main-section__content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .main-section__text {
+    margin-bottom: 10px;
+  }
+
+  /* comment */
+  .comment__text {
+    font-size: var(--font-medium);
+  }
+
+  /* service */
+  .service__analysis__guide__title {
+    font-size: var(--font-medium);
+  }
+
+  .service__recommendation__guide__title {
+    font-size: var(--font-medium);
+  }
+
+  /* shortcut */
+  .shortcut__guide__title {
+    font-size: var(--font-large);
+  }
+}
