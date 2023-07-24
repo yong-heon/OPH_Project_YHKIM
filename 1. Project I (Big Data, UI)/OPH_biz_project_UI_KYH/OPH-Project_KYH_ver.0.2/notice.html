@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>일인가구</title>
+    <meta name="description" content="index.html" />
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet" />
+    <!-- Favicon -->
+    <link rel="icon" href="images/favicon.ico" />
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <!-- navbar -->
+    <nav class="navbar">
+      <div class="navbar__container">
+        <div class="navbar__logo">
+          <a href="index.html">
+            <img src="images/nav/navbar_logo.png" alt="logo" />
+          </a>
+        </div>
+
+        <ul class="navbar__menu">
+          <li class="navbar__menu-item"><a href="#">서비스 소개</a></li>
+          <li class="navbar__menu-item"><a href="analysis.html">주거지역 분석</a></li>
+          <li class="navbar__menu-item"><a href="recommendation.html">주거지역 추천</a></li>
+          <li class="navbar__menu-item active"><a href="notice.html">알림마당</a></li>
+        </ul>
+
+        <ul class="navbar__user">
+          <li class="navbar__user-item"><a href="login.html">로그인</a></li>
+          <li class="navbar__user-divider">｜</li>
+          <li class="navbar__user-item"><a href="join.html">회원가입</a></li>
+        </ul>
+
+        <!-- Icon -->
+        <a href="#none" class="navbar__icon navbar__icon--menu"><img src="images/nav/icon_menu.png" alt="menu-icon" /></a>
+        <a href="#none" class="navbar__icon navbar__icon--close"><img src="images/nav/icon_close.png" alt="close-icon" /></a>
+      </div>
+    </nav>
+
+    <main>
+      <section class="notice">
+        <div class="notice__container">
+          <div class="notice__title">
+            <h1>알림마당</h1>
+          </div>
+        </div>
+        <ul class="notice__menu">
+          <li class="notice__menu-item active"><a href="#">공지사항</a></li>
+          <li class="notice__menu-item"><a href="#">1인가구 뉴스</a></li>
+          <li class="notice__menu-item"><a href="#">QnA</a></li>
+          <li class="notice__menu-item"><a href="#">지원 및 정책</a></li>
+        </ul>
+      </section>
+      <!-- noticeBoard -->
+      <section class="noticeBoard">
+        <table id="noticeBoard__table">
+          <thead class="noticeBoard__table__thead">
+            <tr>
+              <th scope="col">No</th>
+              <th scope="col">제목</th>
+              <th scope="col">작성일</th>
+            </tr>
+          </thead>
+          <tbody class="noticeBoard__table__tbody"></tbody>
+        </table>
+      </section>
+    </main>
+
+    <!-- footer -->
+    <footer class="footer">
+      <div class="footer__container">
+        <div class="footer__logo">
+          <img src="images/footer/footer_logo.png" alt="footer_logo" />
+        </div>
+        <address class="footer__address">
+          일인가구 <br />
+          번호 : 000-000-000 ｜ 이메일 : abc.abc.com <br />
+          주소 : 서울특별시 마포구 신촌로 104, 5F
+        </address>
+        <ul class="footer__menu">
+          <li class="footer__menu-item"><a href="#">이용약관</a></li>
+          <li class="footer__menu-item"><a href="#">개인정보취급방침</a></li>
+        </ul>
+        <ul class="footer__sns">
+          <li class="footer__sns-item">
+            <a href="#"><img src="images/footer/icon_instargram.png" alt="icon_facebook" /></a>
+          </li>
+          <li class="footer__sns-item">
+            <a href="#"><img src="images/footer/icon_facebook.png" alt="icon_facebook" /></a>
+          </li>
+          <li class="footer__sns-item">
+            <a href="#"><img src="images/footer/icon_youtube.png" alt="icon_facebook" /></a>
+          </li>
+        </ul>
+        <span class="footer__copywriter">COPYRIGHT ⓒ One Team. ALL RIGHTS RESERVED.</span>
+      </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="js/navbar.js" defer></script>
+    <script src="js/main.js" defer></script>
+  </body>
+</html>
