@@ -1,0 +1,269 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>주거형태 추천 | 일인가구</title>
+ <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet" />
+    <!-- Favicon -->
+    <link rel="icon" href="images/favicon.ico" />
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css" />
+    <!-- Kakao API Key -->
+    <script type="text/javascript" src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=a115505e7349d21acbbe4e94386d95e4&libraries=services,clusterer,drawing"></script>
+</head>
+<body>
+ <!-- navbar -->
+    <nav class="navbar">
+      <div class="navbar__container">
+        <div class="navbar__logo">
+          <a href="index.html">
+            <img src="images/nav/navbar_logo.png" alt="logo" />
+          </a>
+        </div>
+
+        <ul class="navbar__menu">
+          <li class="navbar__menu-item"><a href="#">서비스 소개</a></li>
+          <li class="navbar__menu-item"><a href="analysis.html">주거지역 분석</a></li>
+          <li class="navbar__menu-item active"><a href="recommendation.html">주거지역 추천</a></li>
+          <li class="navbar__menu-item"><a href="notice.html">알림마당</a></li>
+        </ul>
+
+        <ul class="navbar__user">
+          <li class="navbar__user-item"><a href="login.html">로그인</a></li>
+          <li class="navbar__user-divider">｜</li>
+          <li class="navbar__user-item"><a href="join.html">회원가입</a></li>
+        </ul>
+
+        <!-- Icon -->
+        <a href="#none" class="navbar__icon navbar__icon--menu"><img src="images/nav/icon_menu.png" alt="menu-icon" /></a>
+        <a href="#none" class="navbar__icon navbar__icon--close"><img src="images/nav/icon_close.png" alt="close-icon" /></a>
+      </div>
+    </nav>
+
+    <!-- main -->
+    <main>
+      <div class="informationbar">
+        <a class="informationbar__sidebar" href="#">메뉴</a>
+        <div class="informationbar__manual">
+          <a class="informationbar__manual__usage" href="#">이용법</a>
+          <p class="informationbar__manual__text">목적지 선택 후 좌측 화살표 버튼 또는 메뉴를 클릭해 정보를 확인하실 수 있습니다.</p>
+        </div>
+      </div>
+      <!-- map -->
+      <div class="map">
+        <div class="map__wrap">
+          <div class="map__content" id="map">
+            <!-- manual -->
+            <div class="manual active">
+              <div class="manual__content">
+                <div class="manual__img"></div>
+                <div class="manual__close"><a href="#">닫기</a></div>
+              </div>
+            </div>
+            <!-- address search -->
+            <div class="address">
+              <div class="address__searchInput">
+                <div class="address__searchInput__wrap">
+                  <form onsubmit="searchPlaces(); return false;">
+                    <input id="keyword" class="address__searchInput__searchBar" type="text" value="" size="15" placeholder="주소를 검색하세요" onclick="clearKeyword()" />
+                    <button class="address__searchInput__searchBtn" type="submit">
+                      <img src="images/recomm/icon_search.png" alt="icon_search" />
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <!-- modal -->
+            <div class="modal">
+              <div class="modal__dialog">
+                <div class="modal__content">
+                  <div class="modal__header">
+                    <h2 class="modal__header__title">자세히 보기</h2>
+                    <button class="modal__header__close" type="button">&times;</button>
+                  </div>
+                  <div class="modal__body">
+                    <!-- modal__table -->
+                    <table id="modal__table">
+                      <thead class="modal__table__thead">
+                        <tr>
+                          <th scope="col">순번</th>
+                          <th scope="col">자치구명</th>
+                          <th scope="col">법정동명</th>
+                          <th scope="col">주거형태</th>
+                          <th scope="col">임대면적</th>
+                          <th scope="col">전월세 구분</th>
+                          <th scope="col">보증금(만원)</th>
+                          <th scope="col">임대료(만원)</th>
+                          <th scope="col">건물명</th>
+                        </tr>
+                      </thead>
+                      <tbody class="modal__table__tbody"></tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="modal__dialog__scoll"></div>
+              </div>
+            </div>
+          </div>
+          <!-- sidebar -->
+          <div class="sidebar">
+            <div class="sidebar__toggle">
+              <img class="sidebar__toggle__icon open" src="images/recomm/icon_sidebar_open.png" alt="sidebar-open" />
+              <img class="sidebar__toggle__icon close" src="images/recomm/icon_sidebar_close.png" alt="sidebar-close" />
+            </div>
+            <div class="sidebar__content">
+              <form action="">
+                <div id="clickLatlng"></div>
+                <div class="sidebar__content__title">항목 선택하기</div>
+                <div class="sidebar__content__tab">
+                  <ul class="sidebar__content__tab-menu">
+                    <li class="sidebar__content__tab-menu-item"><a href="#tab01">주거형태</a></li>
+                    <li class="sidebar__content__tab-menu-item"><a href="#tab02">주거면적</a></li>
+                    <li class="sidebar__content__tab-menu-item"><a href="#tab03">편의시설</a></li>
+                    <li class="sidebar__content__tab-menu-item"><a href="#tab04">대중교통</a></li>
+                  </ul>
+                  <div class="sidebar__content__tab-content">
+                    <!-- sidebar__content__tab-content tab01 -->
+                    <div id="tab01" class="tab01">
+                      <div class="tab01__content">
+                        <div class="tab01__type type01">
+                          <div class="tab01__type-title type01__title">주거형태</div>
+                          <div class="tab01__content type01__content">
+                            <label for="residenceType1">
+                              <input id="residenceType1" type="radio" name="residenceType" value="다세대주택" />
+                              다세대주택
+                            </label>
+                            <label for="residenceType2">
+                              <input id="residenceType2" type="radio" name="residenceType" value="오피스텔" />
+                              오피스텔
+                            </label>
+                            <label for="residenceType3">
+                              <input id="residenceType3" type="radio" name="residenceType" value="아파트" />
+                              아파트
+                            </label>
+                          </div>
+                        </div>
+                        <div class="tab01__type type02">
+                          <div class="tab01__type-title type02__title">거래정보</div>
+                          <div class="tab01__content type02__content">
+                            <label for="rentType1">
+                              <input id="rentType1" type="radio" name="rentType" value="월세" />
+                              월세
+                            </label>
+                            <label for="rentType2">
+                              <input id="rentType2" type="radio" name="rentType" value="전세" />
+                              전세
+                            </label>
+                            <label for="rentType4">
+                              <input id="rentType4" type="radio" name="rentType" value="매매" />
+                              매매
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- sidebar__content__tab-content tab02 -->
+                    <div id="tab02" class="tab02">
+                      <div class="tab02__content">
+                        <div class="tab02__type type03">
+                          <div class="tab02__type-title type03__title">주거면적</div>
+                          <div class="tab02__content type03__content">
+                            <label for="residenceSize1">
+                              <input id="residenceSize1" type="radio" name="residenceSize" value="~20" />
+                              1㎡ ~ 20㎡
+                            </label>
+                            <label for="residenceSize2">
+                              <input id="residenceSize2" type="radio" name="residenceSize" value="~40" />
+                              21㎡ ~ 40㎡
+                            </label>
+                            <label for="residenceSize3">
+                              <input id="residenceSize3" type="radio" name="residenceSize" value="~60" />
+                              41㎡ ~ 60㎡
+                            </label>
+                            <label for="residenceSize4">
+                              <input id="residenceSize4" type="radio" name="residenceSize" value="~85" />
+                              61㎡ ~ 85㎡
+                            </label>
+                            <label for="residenceSize5">
+                              <input id="residenceSize5" type="radio" name="residenceSize" value="85~" />
+                              85㎡ ~
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- sidebar__content__tab-content tab03 -->
+                    <div id="tab03" class="tab03">
+                      <div class="tab03__content">
+                        <div class="tab03__type type05">
+                          <div class="tab03__type-title type05__title">편의시설</div>
+                          <div class="tab03__content type05__content">
+                            <label for="storeType1">
+                              <input id="storeType1" type="checkbox" name="storeType" value="대형마트" />
+                              대형마트
+                            </label>
+                            <label for="storeType2">
+                              <input id="storeType2" type="checkbox" name="storeType" value="편의점" />
+                              편의점
+                            </label>
+                            <label for="storeType3">
+                              <input id="storeType3" type="checkbox" name="storeType" value="카페" />
+                              카페
+                            </label>
+                            <label for="storeType4">
+                              <input id="storeType4" type="checkbox" name="storeType" value="공원" />
+                              공원
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- sidebar__content__tab-content tab04 -->
+                    <div id="tab04" class="tab04">
+                      <div class="tab04__content">
+                        <div class="tab04__type type06">
+                          <div class="tab04__type-title type06__title">대중교통</div>
+                          <div class="tab04__content type06__content">
+                            <label for="transportType1">
+                              <input id="transportType1" type="checkbox" name="transportType" value="지하철" />
+                              지하철
+                            </label>
+                            <!--  
+                            <label for="transportType2">
+                              <input id="transportType2" type="checkbox" name="transportType" value="버스" />
+                              버스
+                            </label>
+                            -->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- sidebar__content__tab-content searchBtn -->
+                <div class="sidebar__content__button">
+                  <button class="searchBtn" disabled="">검색하기</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- JavaScript -->
+    <script src="js/navbar.js" defer></script>
+    <script src="js/recomm.js" defer></script>
+    <script src="js/map.js" defer></script>
+    <script src="js/modal.js" defer></script>
+
+    <!-- 지도검색 js -->
+</body>
+</html>
