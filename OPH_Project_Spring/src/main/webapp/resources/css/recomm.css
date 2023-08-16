@@ -241,6 +241,12 @@ main {
   font-size: var(--font-micro);
 }
 
+.manual__close label {
+    color: var(--color-white);
+    font-size: var(--font-micro);
+    margin-left: 10px;  /* 간격을 주기 위해 */
+}
+
 /* modal */
 .modal {
   display: none;

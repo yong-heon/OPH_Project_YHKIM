@@ -73,6 +73,8 @@
 						<div class="manual__img"></div>
 						<div class="manual__close">
 							<a href="#">닫기</a>
+							 <input type="checkbox" id="dismissManualForToday">
+							 <label for="dismissManualForToday">오늘 하루 그만보기</label>
 						</div>
 					</div>
 				</div>
@@ -130,8 +132,7 @@
 					<img class="sidebar__toggle__icon close" src="<c:url value='/images/recomm/icon_sidebar_close.png'/>" alt="sidebar-close" />
 				</div>
 				<div class="sidebar__content">
-					<form action="/OPH_Project_ver0.4/processRecommendation.do"
-						method="post">
+					<form action="./insertuserpref"	method="post">
 						<div id="clickLatlng"></div>
 						<div class="sidebar__content__title">선호정보 입력</div>
 						<div class="sidebar__content__tab">
@@ -151,16 +152,12 @@
 										<div class="tab01__type type01">
 											<div class="tab01__type-title type01__title">주거형태</div>
 											<div class="tab01__content type01__content">
-												<label for="residenceType1"> <input
-													id="residenceType1" type="radio" name="residenceType"
-													value="다세대주택" /> 다세대주택
-												</label> <label for="residenceType2"> <input
-													id="residenceType2" type="radio" name="residenceType"
-													value="오피스텔" /> 오피스텔
-												</label> <label for="residenceType3"> <input
-													id="residenceType3" type="radio" name="residenceType"
-													value="아파트" /> 아파트
-												</label>
+												<label for="residenceType1"> 
+												<input id="residenceType1" type="radio" name="residenceType" value="다세대주택" /> 다세대주택</label>
+												<label for="residenceType2"> 
+												<input id="residenceType2" type="radio" name="residenceType"	value="오피스텔" /> 오피스텔</label>
+												<label for="residenceType3"> 
+												<input id="residenceType3" type="radio" name="residenceType" value="아파트" /> 아파트</label>
 											</div>
 										</div>
 										<div class="tab01__type type02">
@@ -184,13 +181,18 @@
 										<div class="tab02__type type03">
 											<div class="tab02__type-title type03__title">주거비용</div>
 											<div class="tab02__content type03__content">
-												<label for="securityDeposit"> 보증금 : <input
-													id="securityDeposit" type="text" name="securityDeposit"
-													placeholder="보증금 입력 (만 원)" />
-												</label> <label for="monthlyRent"> 월세 : <input
-													id="monthlyRent" type="text" name="monthlyRent"
-													placeholder="월세 입력 (만 원)" />
+												<label for="securityDeposit">
+												보증금: 
+												<input id="securityDeposit" type="text" name="securityDeposit" placeholder="보증금 입력" />
 												</label>
+												<span id="securityDepositFormatted"></span>
+												<br>
+												<label for="monthlyRent">
+												월세: 
+												<input id="monthlyRent" type="text" name="monthlyRent" placeholder="월세 입력" />
+												</label>
+												<span id="monthlyRentFormatted"></span>
+												<br>
 											</div>
 										</div>
 									</div>

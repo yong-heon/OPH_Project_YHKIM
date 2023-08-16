@@ -14,6 +14,33 @@ const closeManual = () => {
 infoManualBtn.addEventListener('click', openManual);
 manualCloseBtn.addEventListener('click', closeManual);
 
+/* 오늘 하루 그만보기 체크박스 */
+window.addEventListener('DOMContentLoaded', function() {
+    var manualElement = document.querySelector('.manual__img');
+    var closeManualBtn = document.getElementById('closeManual');
+    var dismissManualForTodayCheckbox = document.getElementById('dismissManualForToday');
+
+    // 오늘의 날짜를 문자열로 저장
+    var today = new Date().toISOString().split('T')[0];
+
+    // 페이지 로딩 시 오늘 하루 그만보기를 선택했는지 확인
+    if (localStorage.getItem('dismissManualDate') === today) {
+        manualElement.style.display = 'none';
+    }
+
+    // 닫기 버튼 클릭 이벤트
+    closeManualBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // 체크박스가 선택된 경우
+        if (dismissManualForTodayCheckbox.checked) {
+            localStorage.setItem('dismissManualDate', today);
+        }
+
+        manualElement.style.display = 'none';
+    });
+});
+
 /* map sidebar 버튼 클릭 이벤트 */
 const infoSidebar = document.querySelector('.informationbar__sidebar');
 const sidebar = document.querySelector('.sidebar');
@@ -59,21 +86,39 @@ tabMenuItems.forEach((item) => {
     });
 });
 
+/* 주거형태가 전세 또는 매매일 때 월세 입력 칸 비활성화 및 값을 0으로 설정 */
+document.addEventListener('DOMContentLoaded', function() {
+    // 모든 거래정보 라디오 버튼을 가져온다.
+    let rentTypes = document.querySelectorAll('[name="rentType"]');
+    
+    let monthlyRentInput = document.getElementById('monthlyRent');
+    
+    rentTypes.forEach(function(rentType) {
+        rentType.addEventListener('change', function() {
+            // 선택된 거래정보가 전세 또는 매매이면 monthlyRent 입력란을 비활성화하고 값을 0으로 설정한다.
+            if (this.value === '전세' || this.value === '매매') {
+                monthlyRentInput.value = 0;
+                monthlyRentInput.disabled = true;
+            } else {
+                monthlyRentInput.disabled = false;
+            }
+        });
+    });
+});
+
 /* 사용자 보증금 및 월세 입력 시 단위 계산 */
 document.getElementById("securityDeposit").addEventListener("input", function() {
-    this.value = formatDepositToEokMan(this.value);
+    let formattedValue = formatToEokMan(this.value);
+    document.getElementById("securityDepositFormatted").textContent = formattedValue;
 });
 
 document.getElementById("monthlyRent").addEventListener("input", function() {
-    this.value = formatRentToMan(this.value);
+    let formattedValue = formatToEokMan(this.value);
+    document.getElementById("monthlyRentFormatted").textContent = formattedValue;
 });
-function formatDepositToEokMan(value) {
-    let onlyNumbers = value.replace(/[^0-9]/g, ''); 
 
-    if (value.length > 0 && onlyNumbers.length === 0) {
-        alert("금액을 숫자로 입력해 주세요.");
-        return value; 
-    }
+function formatToEokMan(value) {
+    let onlyNumbers = value.replace(/[^0-9]/g, ''); 
 
     let amount = parseInt(onlyNumbers, 10) || 0; 
 
@@ -84,19 +129,44 @@ function formatDepositToEokMan(value) {
     return `${eok}억 ${man}만 원`;
 }
 
-function formatRentToMan(value) {
-    let onlyNumbers = value.replace(/[^0-9]/g, ''); 
+//모든 <select> 요소를 가져온다.
+let selects = document.querySelectorAll('.tab03__content select');
 
-    if (value.length > 0 && onlyNumbers.length === 0) {
-        alert("금액을 숫자로 입력해 주세요.");
-        return value; 
-    }
+selects.forEach((selectElement) => {
+    selectElement.addEventListener('change', function() {
+        resetDisabledOptions();
+        updateDisabledOptions();
+    });
+});
 
-    let amount = parseInt(onlyNumbers, 10) || 0;
+function resetDisabledOptions() {
+    // 모든 <option>들의 disabled 상태를 초기화한다.
+    selects.forEach((select) => {
+        let options = select.options;
+        for (let i = 0; i < options.length; i++) {
+            options[i].disabled = false;
+        }
+    });
+}
 
-    if (amount === 0) return '';
+function updateDisabledOptions() {
+    // 현재 선택된 값을 모두 저장한다.
+    let selectedValues = [];
+    selects.forEach((select) => {
+        if (select.value) {
+            selectedValues.push(select.value);
+        }
+    });
 
-    return `${amount}만 원`;
+    // 다른 <select>의 <option>들 중에서 이미 선택된 값을 비활성화한다.
+    selects.forEach((select) => {
+        let options = select.options;
+        for (let i = 0; i < options.length; i++) {
+            if (selectedValues.includes(options[i].value) && options[i].value !== select.value) {
+                options[i].disabled = true;
+            }
+        }
+    });
 }
 /* 사용자 정보 모두 선택 시 검색하기 활성화 이벤트 */
 document.addEventListener("DOMContentLoaded", function() {
