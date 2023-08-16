@@ -20,7 +20,7 @@ public class OPHAnalysisController {
 	
 	@PostMapping("/oph/ajax/{district}/{aItem}")
 	public @ResponseBody Map<String, Object> getAnalysisDataByPathVariable(@PathVariable String district, @PathVariable String aItem) {
-		System.out.println("district : " + district + " / aItem : " + aItem);
+		System.out.println("district : " + district + " / aItem : " + aItem); // 지역과 분석항목 console로 확인
 	    return ophAnalysisService.fetchData(district, aItem);
 
 	}
