@@ -172,24 +172,6 @@ function updateHiddenInputValues() {
 
 
 // 그래프 그릴 때 필요한 데이터 받아오는 함수
-/*function getDataFromServer() {
-	return new Promise((resolve, reject) => {
-		$.ajax({
-	        url: '/myapp/oph/fetchData',
-	        type: 'GET',
-	        dataType: 'json',
-	        data : $("#graphResultForm").serialize(),
-	        success: function(data) {
-	            resolve(data);
-	            console.log(data);
-	        },
-	        error: function(xhr, status, error) {
-	            console.error("AJAX Error: ", error);
-	            reject(error);
-	        }
-	    });	
-	});
-}*/
 function getDataFromServer() {
     return new Promise((resolve, reject) => {
         

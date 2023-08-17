@@ -19,6 +19,8 @@
 <!-- Kakao API Key -->
 <script type="text/javascript"
 	src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=748561d1582edbce8ffda338b0b2ee2b&libraries=services,clusterer,drawing"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	
 
 
 </head>
@@ -68,13 +70,11 @@
 		<div class="map__wrap">
 			<div class="map__content" id="map">
 				<!-- manual -->
-				<div class="manual active">
+				<div class="manual">
 					<div class="manual__content">
 						<div class="manual__img"></div>
 						<div class="manual__close">
-							<a href="#">닫기</a>
-							 <input type="checkbox" id="dismissManualForToday">
-							 <label for="dismissManualForToday">오늘 하루 그만보기</label>
+							<a href="#" id="closeManual">닫기</a>
 						</div>
 					</div>
 				</div>
@@ -163,13 +163,12 @@
 										<div class="tab01__type type02">
 											<div class="tab01__type-title type02__title">거래정보</div>
 											<div class="tab01__content type02__content">
-												<label for="rentType1"> <input id="rentType1"
-													type="radio" name="rentType" value="월세" /> 월세
-												</label> <label for="rentType2"> <input id="rentType2"
-													type="radio" name="rentType" value="전세" /> 전세
-												</label> <label for="rentType4"> <input id="rentType4"
-													type="radio" name="rentType" value="매매" /> 매매
-												</label>
+												<label for="rentType1"> 
+												<input id="rentType1" type="radio" name="rentType" value="월세" /> 월세</label>
+												<label for="rentType2">
+												<input id="rentType2" type="radio" name="rentType" value="전세" /> 전세</label>
+												<label for="rentType4">
+												<input id="rentType4" type="radio" name="rentType" value="매매" /> 매매</label>
 											</div>
 										</div>
 									</div>
@@ -241,7 +240,7 @@
 
 						<!-- sidebar__content__tab-content searchBtn -->
 						<div class="sidebar__content__button">
-							<input type="submit" class="searchBtn" value="제출">
+							<input type="submit" class="searchBtn" id = "fetchData" value="제출">
 						</div>
 					</form>
 				</div>

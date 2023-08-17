@@ -14,33 +14,6 @@ const closeManual = () => {
 infoManualBtn.addEventListener('click', openManual);
 manualCloseBtn.addEventListener('click', closeManual);
 
-/* 오늘 하루 그만보기 체크박스 */
-window.addEventListener('DOMContentLoaded', function() {
-    var manualElement = document.querySelector('.manual__img');
-    var closeManualBtn = document.getElementById('closeManual');
-    var dismissManualForTodayCheckbox = document.getElementById('dismissManualForToday');
-
-    // 오늘의 날짜를 문자열로 저장
-    var today = new Date().toISOString().split('T')[0];
-
-    // 페이지 로딩 시 오늘 하루 그만보기를 선택했는지 확인
-    if (localStorage.getItem('dismissManualDate') === today) {
-        manualElement.style.display = 'none';
-    }
-
-    // 닫기 버튼 클릭 이벤트
-    closeManualBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        // 체크박스가 선택된 경우
-        if (dismissManualForTodayCheckbox.checked) {
-            localStorage.setItem('dismissManualDate', today);
-        }
-
-        manualElement.style.display = 'none';
-    });
-});
-
 /* map sidebar 버튼 클릭 이벤트 */
 const infoSidebar = document.querySelector('.informationbar__sidebar');
 const sidebar = document.querySelector('.sidebar');
@@ -98,9 +71,9 @@ document.addEventListener('DOMContentLoaded', function() {
             // 선택된 거래정보가 전세 또는 매매이면 monthlyRent 입력란을 비활성화하고 값을 0으로 설정한다.
             if (this.value === '전세' || this.value === '매매') {
                 monthlyRentInput.value = 0;
-                monthlyRentInput.disabled = true;
+                monthlyRentInput.readOnly = true;  // 읽기 전용으로 설정
             } else {
-                monthlyRentInput.disabled = false;
+                monthlyRentInput.readOnly = false;
             }
         });
     });
@@ -207,4 +180,34 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // 초기 상태 설정
     updateSearchButtonState();
+});
+
+/* ajax를 통해 비동기로 python결과 데이터 받아오기 */
+$("#fetchData").click(function(e){
+    e.preventDefault(); // 기본 form submit 행동을 방지합니다.
+    
+    var formData = $("form").serializeArray(); // 폼 데이터를 배열로 가져옵니다.
+    var jsonData = {}; 
+
+    // 폼 데이터를 JSON 형식으로 변환합니다.
+    $.each(formData, function(){
+        jsonData[this.name] = this.value;
+    });
+    
+    $.ajax({
+        type: "POST",
+        url: "./getRcommendation",
+        data: JSON.stringify(jsonData), // JSON 형식으로 데이터를 서버에 전송합니다.
+        contentType: "application/json", // 요청의 content type을 설정합니다.
+        dataType: "json", // 응답을 JSON 형식으로 받습니다.
+        success: function(response) {
+            console.log(response);
+            // 이 부분에서 응답을 처리할 수 있습니다.
+            // 예를 들어, DOM 업데이트, 알림 표시 등
+        },
+        error: function(error) {
+            console.error("Error:", error);
+            // 에러 발생 시 처리하는 코드를 이 부분에 작성합니다.
+        }
+    });
 });

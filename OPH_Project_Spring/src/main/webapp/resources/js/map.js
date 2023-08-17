@@ -74,8 +74,9 @@ kakao.maps.event.addListener(map, "click", function (mouseEvent) {
 });
 
 /* 탭-검색하기 버튼을 클릭하면 랜덤 마커 3개를 생성하는 기능 */
+var searchBtn = document.querySelector('.searchBtn'); // 클래스로 참조
 searchBtn.addEventListener("click", function () {
-  event.preventDefault(); // 폼의 제출 이벤트 기본 동작 중단
+//event.preventDefault(); // 폼의 제출 이벤트 기본 동작 중단
 
   var markerPosition = marker.getPosition();
 
