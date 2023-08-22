@@ -188,6 +188,8 @@ $("#fetchData").click(function(e){
     
     var formData = $("form").serializeArray(); // 폼 데이터를 배열로 가져옵니다.
     var jsonData = {}; 
+    
+    $("#loadingIndicator").css("display", "block"); // 로딩 인디케이터 표시
 
     // 폼 데이터를 JSON 형식으로 변환합니다.
     $.each(formData, function(){
@@ -202,12 +204,15 @@ $("#fetchData").click(function(e){
         dataType: "json", // 응답을 JSON 형식으로 받습니다.
         success: function(response) {
             console.log(response);
-            // 이 부분에서 응답을 처리할 수 있습니다.
-            // 예를 들어, DOM 업데이트, 알림 표시 등
+            
+            $("#loadingIndicator").hide(); // 로딩 인디케이터 숨기기
+
         },
         error: function(error) {
             console.error("Error:", error);
             // 에러 발생 시 처리하는 코드를 이 부분에 작성합니다.
+            // 로딩 인디케이터 숨기기
+            $("#loadingIndicator").hide(); // 로딩 인디케이터 숨기기
         }
     });
 });

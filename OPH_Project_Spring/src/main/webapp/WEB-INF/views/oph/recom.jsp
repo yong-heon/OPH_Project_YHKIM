@@ -246,6 +246,11 @@
 				</div>
 			</div>
 		</div>
+		<!-- 로딩 인디케이터 추가 위치 -->
+		<div id="loadingIndicator" style="display: none;">
+		<img src="<c:url value='/images/recomm/Fading_circles.gif'/>" alt="Loading..." />
+		<p>Loading...</p>
+		</div>
 	</div>
 	</main>
 	<!-- JavaScript -->

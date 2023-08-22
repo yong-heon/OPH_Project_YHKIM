@@ -48,7 +48,7 @@ public class OPHRecommendationRepository implements IOPHRecommendationRepository
 		System.out.println(" : : START : : Use ProcessBuilder ");
 		
 		cmd.add("python");
-		cmd.add("C:\\python_Workspace\\python\\OPH_Project_REC_v0.2.py"); // python script 절대 경로로 설정
+		cmd.add("C:\\python_Workspace\\python\\OPH_Project_REC_v0.3.py"); // python script 절대 경로로 설정
         cmd.add(rvo.getResidenceType());
         cmd.add(rvo.getRentType());
         cmd.add(String.valueOf(rvo.getSecurityDeposit()));

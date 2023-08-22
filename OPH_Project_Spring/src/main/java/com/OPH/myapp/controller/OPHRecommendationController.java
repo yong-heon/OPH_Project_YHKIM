@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.OPH.myapp.Recom.service.IOPHRecommendationService;
@@ -52,7 +53,7 @@ public class OPHRecommendationController {
 	}
 	
 	@PostMapping("/oph/getRcommendation")
-	public JsonNode getRecommendation(@RequestBody OPHRecommendationVO rvo) throws IOException, InterruptedException {
+	public @ResponseBody JsonNode getRecommendation(@RequestBody OPHRecommendationVO rvo) throws IOException, InterruptedException {
 		
 		// 해당 컨트롤러 메서드가 호출되었는지 확인
 		System.out.println("getRecommendation method in OPHRecommendationController is called");

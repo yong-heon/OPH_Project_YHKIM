@@ -559,6 +559,18 @@ a {
   filter: brightness(150%);
 }
 
+/* #loadingIndicator {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1000; // 다른 요소 위에 나타나도록 z-index 값을 높게 설정합니다.
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+} */
+
 /* Responsive Web (tablet) */
 @media screen and (max-width: 1024px) {
   .manual__img {
