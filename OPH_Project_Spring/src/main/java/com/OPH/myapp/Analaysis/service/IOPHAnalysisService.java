@@ -9,5 +9,6 @@ public interface IOPHAnalysisService {
     List<Double> getPercentile(String district, String aItem);
     List<String> getGrades(String district, String aItem);
     Map<String, Object> fetchData(String district, String aItem);
-
+    List<Double> fetchOverallAverages(String aItem);   
+	List<Double> fetchOverallPercentiles(String aItem);
 }

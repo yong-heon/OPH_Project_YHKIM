@@ -255,9 +255,9 @@
 	</main>
 	<!-- JavaScript -->
 	<script src="<c:url value='/js/navbar.js'/>" defer></script>
-	<script src="<c:url value='/js/recomm.js'/>" defer></script>
 	<script src="<c:url value='/js/map.js'/>" defer></script>
 	<script src="<c:url value='/js/modal.js'/>" defer></script>
+	<script src="<c:url value='/js/recomm.js'/>" defer></script>
 
 	<!-- 지도검색 js -->
 	<%--     <% if (request.getAttribute("alertMessage") != null) { %>

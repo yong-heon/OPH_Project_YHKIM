@@ -63,4 +63,39 @@ public class OPHAnalysisRepository implements IOPHAnalysisRepository {
             }
         });
     }
+    @Override
+    public List<Double> fetchOverallAverages(String aItem) {
+        String query = "SELECT AVG(SALEPRICEAVG) AS avg_saleprice, AVG(JEONSEPRICEAVG) AS avg_jeonse, AVG(MONTHLYDEPOSITAVG) AS avg_monthlydeposit, AVG(MONTHLYAVG) AS avg_monthly FROM " + aItem; 
+        // NOTE: RESIDENCE 는 여기서 테이블 이름을 실제 데이터베이스의 아파트, 오피스텔, 다세대주택 데이터가 합쳐진 테이블 이름으로 변경해야 합니다.
+
+        return jdbcTemplate.queryForObject(query, new RowMapper<List<Double>>() {
+            @Override
+            public List<Double> mapRow(ResultSet rs, int rowNum) throws SQLException {
+                List<Double> averages = new ArrayList<>();
+                averages.add(rs.getDouble("avg_saleprice"));
+                averages.add(rs.getDouble("avg_jeonse"));
+                averages.add(rs.getDouble("avg_monthlydeposit"));
+                averages.add(rs.getDouble("avg_monthly"));
+                return averages;
+            }
+        });
+    }
+
+	@Override
+	public List<Double> fetchOverallPercentiles(String aItem) {
+	    String query = "SELECT AVG(SALEPRICEPERCENTILE) AS sale_price_pct, AVG(JEONSEPRICEPERCENTILE) AS jeonse_price_pct, AVG(MONTHLYDEPOSITPERCENTILE) AS monthly_deposit_pct, AVG(MONTHLYPERCENTILE) AS monthly_price_pct FROM " + aItem ; 
+
+	    return jdbcTemplate.queryForObject(query, new RowMapper<List<Double>>() {
+	        @Override
+	        public List<Double> mapRow(ResultSet rs, int rowNum) throws SQLException {
+	            List<Double> percentiles = new ArrayList<>();
+	            percentiles.add(rs.getDouble("sale_price_pct"));
+	            percentiles.add(rs.getDouble("jeonse_price_pct"));
+	            percentiles.add(rs.getDouble("monthly_deposit_pct"));
+	            percentiles.add(rs.getDouble("monthly_price_pct"));
+	            return percentiles;
+	        }
+	    });
+	}
+    
 }

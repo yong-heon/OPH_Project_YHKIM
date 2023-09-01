@@ -1,5 +1,6 @@
 package com.OPH.myapp.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,16 @@ public class OPHAnalysisController {
 	public @ResponseBody Map<String, Object> getAnalysisDataByPathVariable(@PathVariable String district, @PathVariable String aItem) {
 		System.out.println("district : " + district + " / aItem : " + aItem); // 지역과 분석항목 console로 확인
 	    return ophAnalysisService.fetchData(district, aItem);
+	}
+	
+	@GetMapping("/oph/averages/{aItem}")
+    public @ResponseBody List<Double> getOverallAverages(@PathVariable String aItem) {
+        return ophAnalysisService.fetchOverallAverages(aItem);
+    }
 
+	@GetMapping("/oph/percentiles/{aItem}")
+	public @ResponseBody List<Double> getPercentiles(@PathVariable String aItem) {
+	    return ophAnalysisService.fetchOverallPercentiles(aItem);
 	}
 	
 	@GetMapping("/oph/{pageName}")

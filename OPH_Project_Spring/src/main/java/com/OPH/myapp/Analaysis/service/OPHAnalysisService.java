@@ -39,5 +39,14 @@ public class OPHAnalysisService implements IOPHAnalysisService {
         analysisData.put("grades", getGrades(district, aItem));
         return analysisData;
     }
+    @Override
+    public List<Double> fetchOverallAverages(String aItem) {
+        return ophAnalysisRepository.fetchOverallAverages(aItem);
+    }
+    @Override    
+    public List<Double> fetchOverallPercentiles(String aItem) {
+    	return ophAnalysisRepository.fetchOverallPercentiles(aItem); //이제 자바스크립트로 백분위 시각화 부분 수정해야됨
+    }
+
 
 }

@@ -207,6 +207,7 @@ $("#fetchData").click(function(e){
             
             $("#loadingIndicator").hide(); // 로딩 인디케이터 숨기기
 
+
         },
         error: function(error) {
             console.error("Error:", error);

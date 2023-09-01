@@ -171,7 +171,7 @@ function updateHiddenInputValues() {
 
 
 
-// 그래프 그릴 때 필요한 데이터 받아오는 함수
+/*// 그래프 그릴 때 필요한 데이터 받아오는 함수
 function getDataFromServer() {
     return new Promise((resolve, reject) => {
         
@@ -185,21 +185,122 @@ function getDataFromServer() {
         $.ajax({
             url: apiUrl,
             type: 'POST',
-            contentType: 'application/json; charset=utf-8', // JSON 형식의 데이터를 보낼 때 필요
+            contentType: 'application/json; charset=utf-8',
             dataType: 'json',
             success: function(data) {
-                resolve(data);
-                console.log(data);
+                // 추가적으로 전반적인 주거형태의 자치구 평균 데이터를 가져옵니다.
+                $.get(`./averages/${aItem}`, function(overallAvg) {
+                    data.overallAvg = overallAvg;
+                    $.get(`./oph/percentiles/${aItem}`, function(overallPercentiles) {
+                        data.overallPercentiles = overallPercentiles;
+                        resolve(data);
+                        console.log(data);
+                    }).fail(function(error) {
+                        reject(error);
+                    });
+                }).fail(function(error) {
+                    reject(error);
+                });
             },
             error: function(xhr, status, error) {
                 reject(error);
             }
         });    
     });
+}*/
+
+function fetchData(url, type = 'GET', data = null) {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            url: url,
+            type: type,
+            data: data ? JSON.stringify(data) : null,
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function(response) {
+                resolve(response);
+            },
+            error: function(xhr, status, error) {
+                reject(error);
+            }
+        });
+    });
 }
 
+function getDataFromServer() {
+    const district = $("#hiddenDistrict").val();
+    const aItem = $("#hiddenAItem").val();
+    const apiUrl = `./ajax/${district}/${aItem}`;
+    
+    console.log("Sending to server:", district, aItem);
+
+    return fetchData(apiUrl, 'POST')
+    .then(data => {
+        return fetchData(`./averages/${aItem}`)
+        .then(overallAvg => {
+            data.overallAvg = overallAvg;
+            return data;
+        });
+    })
+    .then(data => {
+        return fetchData(`./percentiles/${aItem}`)
+        .then(overallPercentiles => {
+            data.overallPercentiles = overallPercentiles;
+            return data;
+        });
+    })
+    .catch(error => {
+        console.error(error);
+    });
+}
+
+
+
 // 라디오 버튼에서 선택된 분석항목 값 가져오기
-function getSelectedRadioValue(name) {
+function getSelectedRadioValue(name) {function fetchData(url, type = 'GET', data = null) {
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            url: url,
+            type: type,
+            data: data ? JSON.stringify(data) : null,
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function(response) {
+                resolve(response);
+            },
+            error: function(xhr, status, error) {
+                reject(error);
+            }
+        });
+    });
+}
+
+function getDataFromServer() {
+    const district = $("#hiddenDistrict").val();
+    const aItem = $("#hiddenAItem").val();
+    const apiUrl = `./ajax/${district}/${aItem}`;
+    
+    console.log("Sending to server:", district, aItem);
+
+    return fetchData(apiUrl, 'POST')
+    .then(data => {
+        return fetchData(`./averages/${aItem}`)
+        .then(overallAvg => {
+            data.overallAvg = overallAvg;
+            return data;
+        });
+    })
+    .then(data => {
+        return fetchData(`./percentiles/${aItem}`)
+        .then(overallPercentiles => {
+            data.overallPercentiles = overallPercentiles;
+            return data;
+        });
+    })
+    .catch(error => {
+        console.error(error);
+    });
+}
     const radioButtons = document.querySelectorAll(`input[name=${name}]:checked`);
     if (radioButtons.length > 0) {
         return radioButtons[0].value;
@@ -232,30 +333,24 @@ function drawAvgGraph(data) {
         avgChart.destroy();
     }
     avgChart = new Chart(ctx, {
-		type: 'bar',
-		data: {
-			labels: ['매매평균', '전세평균', '월세보증금평균'],
-			datasets: [{
-				label: '평균값',
-				data: data.avgValues.map(value => Math.round(value)), // 데이터
-																		// 반올림
-				backgroundColor: [
-					'rgba(255, 99, 132, 0.2)',
-					'rgba(54, 162, 235, 0.2)',
-					'rgba(255, 206, 86, 0.2)',
-
-				],
-				borderColor: [
-					'rgba(255, 99, 132, 1)',
-					'rgba(54, 162, 235, 1)',
-					'rgba(255, 206, 86, 1)',
-
-				],
-		        borderWidth: 1,
-		        barPercentage: 0.7,
-		        categoryPercentage: 0.7
-		        }]
-		},
+    	type: 'line',
+        data: {
+            labels: ['매매평균', '전세평균', '월세보증금평균'],
+            datasets: [
+                {
+                    label: '전체 평균',
+                    data: data.overallAvg.map(value => Math.round(value)), // 변경된 부분
+                    borderColor: 'rgba(153, 102, 255, 1)',
+                    fill: false
+                },
+                {
+                    label: data.district + ' 평균',
+                    data: data.avgValues,
+                    borderColor:'rgba(255, 99, 132, 1)',
+                    fill: false
+                }
+            ]
+        },
 		options: {
 			animation: {
 				duration: 1500 // 애니메이션 지속 시간
@@ -308,33 +403,34 @@ function drawAvgGraph(data) {
 
 let percentileChart;
 function drawPercentileGraph(data) {
-
-    console.log(data);
     const ctx = document.getElementById('percentileChart').getContext('2d');
     
-    if (percentileChart) { // 기존 차트가 있을 시 이를 지움
+    if (percentileChart) {
     	percentileChart.destroy();
     }
+
+    // 원래의 백분위 데이터와 전체 자치구 평균 백분위 데이터
+    const originalData = data.percentiles;
+    const overallAverageData = data.overallPercentiles;
+
     percentileChart = new Chart(ctx, {
-        type: 'bar',
+        type: 'line',
         data: {
             labels: ['매매백분위', '전세백분위', '월세보증금백분위', '월세백분위'],
             datasets: [{
-                label: '부동산 백분위',
-                data: data.percentiles,
-                backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)'
-                ],
-                borderWidth: 1
+                label: '선택한 자치구 백분위',
+                data: originalData,
+                fill: false,
+                borderColor: 'rgba(255, 99, 132, 1)',
+                backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                lineTension: 0.1
+            }, {
+                label: '전체 자치구 평균 백분위',
+                data: overallAverageData,
+                fill: false,
+                borderColor: 'rgba(153, 102, 255, 1)',
+                backgroundColor: 'rgba(153, 102, 255, 0.5)',
+                lineTension: 0.1
             }]
         },
         options: {
@@ -344,29 +440,19 @@ function drawPercentileGraph(data) {
                     beginAtZero: true,
                     max: 100,
                     ticks: {
-                        callback: function(value, index, values) { // Y 축에 '%'
-																	// 추가
+                        callback: function(value) {
                             return value + '%';
                         }
                     }
                 }
             },
-			animation: {
-				duration: 1500 // 애니메이션 지속 시간
+            animation: {
+				duration: 1500
 			}, 
-
             plugins: {
-				beforeRender: function(chart) {
-					chart.data.datasets[0].data = new Array(originalData.length).fill(0);
-				},
-				beforeDatasetUpdate: function(chart, args) {
-					if(args.mode === 'reset') {
-						args.dataset.data = originalData;
-					}
-				},
                 tooltip: {
                     callbacks: {
-                        label: function(context) { // 툴팁에 '%' 추가
+                        label: function(context) {
                             var label = context.dataset.label || '';
 
                             if (label) {
@@ -384,105 +470,64 @@ function drawPercentileGraph(data) {
     });
 }
 
-// 등급 그래프 그리는 함수
-let gradeCharts = [];
+let gradeRadarChart;
 
-function drawGradeDoughnutCharts(data) {
+function drawGradeRadarChart(data) {
     const grades = ['매매백분위', '전세백분위', '월세보증금백분위', '월세백분위'];
-    const colors = [
-        'rgba(155, 89, 182, 0.8)', // 안정된 보라색
-        'rgba(52, 152, 219, 0.8)', // 안정된 파랑색
-        'rgba(230, 126, 34, 0.8)', // 안정된 주황색
-        'rgba(46, 204, 113, 0.8)'  // 안정된 녹색
+    const pastelColors = [
+        'rgba(201, 213, 219, 0.8)', 
+        'rgba(174, 214, 241, 0.8)', 
+        'rgba(255, 214, 165, 0.8)', 
+        'rgba(162, 217, 206, 0.8)'
     ];
 
-    gradeCharts.forEach(chart => chart.destroy());
-    gradeCharts = [];
+    if (gradeRadarChart) {
+        gradeRadarChart.destroy();
+    }
 
-    grades.forEach((grade, index) => {
-        const canvas = document.getElementById(`${grade}Chart`);
-        const ctx = canvas.getContext('2d');
-        
-        const gradeValue = data.grades[index]; // 'A', 'B', 'C', 'D', 'E' 중 하나
-
-        // 등급에 따른 도넛 차트 데이터 설정
-        const maxSections = 5;
-        let gradeSections;
-        switch (gradeValue) {
-            case 'A':
-                gradeSections = 5;
-                break;
-            case 'B':
-                gradeSections = 4;
-                break;
-            case 'C':
-                gradeSections = 3;
-                break;
-            case 'D':
-                gradeSections = 2;
-                break;
-            case 'E':
-                gradeSections = 1;
-                break;
-        }
-
-        const dataArr = Array(maxSections).fill(1);
-        for (let i = 0; i < gradeSections; i++) {
-            dataArr[i] = 1;
-        }
-
-        let newChart = new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: Array(maxSections).fill(gradeValue).concat('Others'),
-                datasets: [{
-                    data: dataArr,
-                    backgroundColor: [...Array(gradeSections).fill(colors[index]), ...Array(maxSections - gradeSections).fill('#FFFFFF')],
-                    borderColor: [...Array(maxSections).fill('rgba(0,0,0,0.1)'), ...Array(maxSections - gradeSections).fill('rgba(0,0,0,0.1)')],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                cutout: '60%',
-                plugins: {
-                    legend: {
-                        display: false
-                    },
-                    tooltip: {
-                        enabled: false
-                    }
-                },
-                hover: {
-                	mode: null
-                },
-                animation: {
-                    onComplete: function () {
-                        ctx.textAlign = 'center';
-                        ctx.textBaseline = 'middle';
-                        ctx.font = "600 100% Arial";
-                        
-                        // 등급 색상을 글자 색상으로 설정
-                        ctx.fillStyle = colors[index];
-
-                        var x = canvas.width / 2,
-                            y1 = canvas.height / 2 - 20,  // 위쪽 텍스트의 Y 좌표
-                            y2 = canvas.height / 2 + 20;  // 아래쪽 텍스트의 Y 좌표
-
-                        ctx.fillText(grades[index], x, y1);   // 첫 번째 텍스트
-                        ctx.fillText(gradeValue + ' 등급', x, y2);      // 두 번째
-																		// 텍스트
+    const ctx = document.getElementById('gradeChart').getContext('2d');
+    
+    gradeRadarChart = new Chart(ctx, {
+        type: 'radar',
+        data: {
+            labels: grades,
+            datasets: [{
+                label: '아파트 등급',
+                data: data.grades,
+                backgroundColor:pastelColors,
+                borderColor: pastelColors,
+                borderWidth: 2,
+                pointBackgroundColor: pastelColors,
+                pointBorderColor: "#fff",
+                pointHoverBackgroundColor: "#fff",
+                pointHoverBorderColor: pastelColors.map(color => color.replace('0.8', '0.7'))
+            }]
+        },
+        options: {
+            scales: {
+                r: {
+                    beginAtZero: true,
+                    max: 5,
+                    ticks: {
+                        stepSize: 1
                     }
                 }
+            },
+            animation: {
+                duration: 1000,
+                easing: 'easeOutBounce'
             }
-        });
-        
-        gradeCharts.push(newChart);
+        }
     });
 }
 
-
-
+//jQuery를 사용한다고 가정
+$(document).ready(function() {
+    $('#showGradeInfo').click(function() {
+        // 등급 산정 요인 설명 영역의 표시 상태를 토글
+        $('#gradeInfo').toggle();
+    });
+});
 
 
 // 숫자를 억, 천 만원 단위로 포맷하는 함수
@@ -517,7 +562,7 @@ function drawTable(data) {
 
     // 테이블 헤더 생성
     let headerRow = document.createElement("tr");
-    let headers = ["자치구 이름", "매매평균가", "전세평균가", "월세보증금 평균", "월세평균가"];
+    let headers = ["자치구", "매매평균가", "전세평균가", "월세보증금 평균", "월세평균가"];
     headers.forEach(header => {
         let th = document.createElement("th");
         th.textContent = header;
@@ -598,7 +643,7 @@ $("#graphResultForm").submit(function(event){
         drawPercentileGraph(data);
         drawTable(data);  // 평균 값 테이블 그리는 함수 호출
         drawPercentileTable(data);
-        drawGradeDoughnutCharts(data);
+        drawGradeRadarChart(data);
     });
 });
 

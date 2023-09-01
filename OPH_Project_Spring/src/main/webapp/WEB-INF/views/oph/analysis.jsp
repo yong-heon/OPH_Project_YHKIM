@@ -77,13 +77,8 @@
 				<div class="analysis__container--mapreport">
 					<div class="analysis__container--mapreport-item">
 						<ul>
-							<li class="item_1"><input type="radio" name="aItem"
-								value="인구밀집도" id="map-report-tab_1" class="input-radio_1" /> <label
-								for="map-report-tab_1" class="item-radio_1"> <span
-									class="tab_1">인구밀집도</span>
-							</label></li>
 							<li><input type="radio" name="aItem" value="APARTMENTS"
-								id="map-report-tab_2" class="input-radio_2" /> <label
+								id="map-report-tab_2" class="input-radio_2"  checked /> <label
 								for="map-report-tab_2" class="item-radio_2"> <span
 									class="tab_2">아파트</span>
 							</label></li>
@@ -96,6 +91,11 @@
 								id="map-report-tab_4" class="input-radio_4" /> <label
 								for="map-report-tab_4" class="item-radio_4"> <span
 									class="tab_4">연립다세대</span>
+							</label></li>
+								<li class="item_1"><input type="radio" name="aItem"
+								value="인구밀집도" id="map-report-tab_1" class="input-radio_1" /> <label
+								for="map-report-tab_1" class="item-radio_1"> <span
+									class="tab_1">인구밀집도</span>
 							</label></li>
 							<li><input type="radio" name="aItem" value="편의시설"
 								id="map-report-tab_5" class="input-radio_5" /> <label
@@ -122,32 +122,25 @@
 									<div class="analysis__container--mapreport-map">
 										<div data-item="sgg" class="map">
 											<ul>
-												<li><input type="radio" name="mapreport-sgg"
-													value="도봉구" id="map-seoul_1" onchange="showSpanContent()" />
+												<li><input type="radio" name="mapreport-sgg" value="도봉구" id="map-seoul_1" onchange="showSpanContent()" />
 													<label for="map-seoul_1"> <span>도봉구</span>
 												</label></li>
-												<li><input type="radio" name="mapreport-sgg"
-													value="은평구" id="map-seoul_2" onchange="showSpanContent()" />
+												<li><input type="radio" name="mapreport-sgg" value="은평구" id="map-seoul_2" onchange="showSpanContent()" />
 													<label for="map-seoul_2"> <span>은평구</span>
 												</label></li>
-												<li><input type="radio" name="mapreport-sgg"
-													value="강북구" id="map-seoul_3" onchange="showSpanContent()" />
+												<li><input type="radio" name="mapreport-sgg" value="강북구" id="map-seoul_3" onchange="showSpanContent()" />
 													<label for="map-seoul_3"> <span>강북구</span>
 												</label></li>
-												<li><input type="radio" name="mapreport-sgg"
-													value="노원구" id="map-seoul_4" onchange="showSpanContent()" />
+												<li><input type="radio" name="mapreport-sgg" value="노원구" id="map-seoul_4" onchange="showSpanContent()" />
 													<label for="map-seoul_4"> <span>노원구</span>
 												</label></li>
-												<li><input type="radio" name="mapreport-sgg"
-													value="종로구" id="map-seoul_5" onchange="showSpanContent()" />
+												<li><input type="radio" name="mapreport-sgg" value="종로구" id="map-seoul_5" onchange="showSpanContent()" />
 													<label for="map-seoul_5"> <span>종로구</span>
 												</label></li>
-												<li><input type="radio" name="mapreport-sgg"
-													value="성북구" id="map-seoul_6" onchange="showSpanContent()" />
+												<li><input type="radio" name="mapreport-sgg" value="성북구" id="map-seoul_6" onchange="showSpanContent()" />
 													<label for="map-seoul_6"> <span>성북구</span>
 												</label></li>
-												<li><input type="radio" name="mapreport-sgg"
-													value="중랑구" id="map-seoul_7" onchange="showSpanContent()" />
+												<li><input type="radio" name="mapreport-sgg" value="중랑구" id="map-seoul_7" onchange="showSpanContent()" />
 													<label for="map-seoul_7"> <span>중랑구</span>
 												</label></li>
 												<li><input type="radio" name="mapreport-sgg"
@@ -282,12 +275,41 @@
 					</div>
 					<div id="grade" class="tab-content">
 						<div class="graph">
-							<ul class="canvas-list">
-								<li><canvas id="매매백분위Chart"></canvas></li>
-								<li><canvas id="전세백분위Chart"></canvas></li>
-								<li><canvas id="월세보증금백분위Chart"></canvas></li>
-								<li><canvas id="월세백분위Chart"></canvas></li>
-							</ul>
+								<canvas id="gradeChart"></canvas>
+						</div>
+						<button id="showGradeInfo">점수 산정 방법</button>
+
+						<!-- 등급 산정 요인 설명 영역 (초기에는 숨김 상태) -->
+						<div id="gradeInfo" style="display: none;">
+							<h3>등급 산정 방법</h3>
+							<p>등급은 각 데이터의 Z-Score를 기반으로 하여 백분위수로 변환됩니다. 변환된 백분위수를 통해 5개의
+								등급으로 분류하였습니다.</p>
+
+							<table class="grade-table">
+								<tbody>
+									<tr>
+										<td><span class="grade-5">5등급</span></td>
+										<td>백분위수가 20% 이하</td>
+									</tr>
+									<tr>
+										<td><span class="grade-4">4등급</span></td>
+										<td>백분위수가 20% 초과, 40% 이하</td>
+									</tr>
+									<tr>
+										<td><span class="grade-3">3등급</span></td>
+										<td>백분위수가 40% 초과, 60% 이하</td>
+									</tr>
+									<tr>
+										<td><span class="grade-2">2등급</span></td>
+										<td>백분위수가 60% 초과, 80% 이하</td>
+									</tr>
+									<tr>
+										<td><span class="grade-1">1등급</span></td>
+										<td>백분위수가 80% 초과</td>
+									</tr>
+								</tbody>
+							</table>
+
 						</div>
 						<div class="table">
 							<table id="gradeTable" class="custom-table">

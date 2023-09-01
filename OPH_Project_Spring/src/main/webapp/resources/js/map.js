@@ -73,7 +73,7 @@ kakao.maps.event.addListener(map, "click", function (mouseEvent) {
   console.log("클릭한 위치의 [위도] " + latlng.getLat() + " [경도] " + latlng.getLng());
 });
 
-/* 탭-검색하기 버튼을 클릭하면 랜덤 마커 3개를 생성하는 기능 */
+/* 탭-검색하기 버튼을 클릭하면 랜덤 마커 3개를 생성하는 기능 
 var searchBtn = document.querySelector('.searchBtn'); // 클래스로 참조
 searchBtn.addEventListener("click", function () {
 //event.preventDefault(); // 폼의 제출 이벤트 기본 동작 중단
@@ -87,7 +87,7 @@ searchBtn.addEventListener("click", function () {
     // 좌표로 주소 정보를 가져오고, 마커를 생성할 때 행정동과 자치구 정보를 함께 표시
     getAddressFromCoords(randomLat, randomLng, i + 1);
   }
-});
+});*/
 
 // 좌표로 주소 정보 요청
 function getAddressFromCoords(lat, lng, rank) {
