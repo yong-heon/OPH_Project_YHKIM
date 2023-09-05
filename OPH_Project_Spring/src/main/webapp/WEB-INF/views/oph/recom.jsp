@@ -157,14 +157,14 @@
 												<label for="residenceType2"> 
 												<input id="residenceType2" type="radio" name="residenceType"	value="오피스텔" /> 오피스텔</label>
 												<label for="residenceType3"> 
-												<input id="residenceType3" type="radio" name="residenceType" value="아파트" /> 아파트</label>
+												<input id="residenceType3" type="radio" name="residenceType" value="아파트"  checked="checked"/> 아파트</label>
 											</div>
 										</div>
 										<div class="tab01__type type02">
 											<div class="tab01__type-title type02__title">거래정보</div>
 											<div class="tab01__content type02__content">
 												<label for="rentType1"> 
-												<input id="rentType1" type="radio" name="rentType" value="월세" /> 월세</label>
+												<input id="rentType1" type="radio" name="rentType" value="월세"  checked="checked"/> 월세</label>
 												<label for="rentType2">
 												<input id="rentType2" type="radio" name="rentType" value="전세" /> 전세</label>
 												<label for="rentType4">
@@ -182,13 +182,13 @@
 											<div class="tab02__content type03__content">
 												<label for="securityDeposit">
 												보증금: 
-												<input id="securityDeposit" type="text" name="securityDeposit" placeholder="보증금 입력" />
+												<input id="securityDeposit" type="text" name="securityDeposit" placeholder="보증금 입력" value="10000" />
 												</label>
 												<span id="securityDepositFormatted"></span>
 												<br>
 												<label for="monthlyRent">
 												월세: 
-												<input id="monthlyRent" type="text" name="monthlyRent" placeholder="월세 입력" />
+												<input id="monthlyRent" type="text" name="monthlyRent" placeholder="월세 입력" value="200" />
 												</label>
 												<span id="monthlyRentFormatted"></span>
 												<br>
@@ -205,30 +205,30 @@
 											<div class="tab03__content type04__content">
 												<label for="priority1"> 1순위: <select id="priority1"
 													name="priority1">
-														<option value="" selected>선택해주세요</option>
+														<option value="" >선택해주세요</option>
 														<option value="인구">인구밀집도</option>
 														<option value="응급실수">응급실</option>
-														<option value="대형마트수">대형마트</option>
+														<option value="대형마트수" selected>대형마트</option>
 														<option value="주요공원수">공원</option>
 														<option value="지하철역수">지하철</option>
 												</select>
 												</label> <label for="priority2"> 2순위: <select id="priority2"
 													name="priority2">
-														<option value="" selected>선택해주세요</option>
+														<option value="" >선택해주세요</option>
 														<option value="인구">인구밀집도</option>
 														<option value="응급실수">응급실</option>
 														<option value="대형마트수">대형마트</option>
-														<option value="주요공원수">공원</option>
+														<option value="주요공원수" selected>공원</option>
 														<option value="지하철역수">지하철</option>
 												</select>
 												</label> <label for="priority3"> 3순위: <select id="priority3"
 													name="priority3">
-														<option value="" selected>선택해주세요</option>
+														<option value="" >선택해주세요</option>
 														<option value="인구">인구밀집도</option>
 														<option value="응급실수">응급실</option>
 														<option value="대형마트수">대형마트</option>
 														<option value="주요공원수">공원</option>
-														<option value="지하철역수">지하철</option>
+														<option value="지하철역수" selected>지하철</option>
 												</select>
 												</label>
 											</div>
